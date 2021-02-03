@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+MPO publikuje každoročně zprávu Obnovitelné zdroje v roce RRRR se
+statistikami výroby energií z OZE.
+Script scrapuje odkazy na tyto pdf zprávy a uloží je jako csv.
+"""
+
+
 import re
 import csv
 import requests
@@ -55,6 +62,7 @@ def main():
 
     with open('odkazy.csv', 'w', newline='') as csvf:
         writer = csv.DictWriter(csvf, fieldnames=['year', 'url'])
+        writer.writeheader()
         writer.writerows(pdf_url_list)
 
 
