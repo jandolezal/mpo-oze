@@ -29,8 +29,14 @@ def parse_pdf(pdf, year):
     if not os.path.exists(year):
         os.mkdir(year)
     
+    # Write all tables directly to excel
+    dirpath = os.path.abspath(year)
+    excelpath = os.path.join(dirpath, year) + '.xlsx'
+    tables.export(excelpath, f='excel')
+    
     for table in tables:
         
+        # Get rid of spaces between digits for csv files
         adjusted_table = []
         
         for row in table.data:
@@ -39,11 +45,10 @@ def parse_pdf(pdf, year):
         page = str(table.parsing_report['page'])
         order = str(table.parsing_report['order'])
 
-        filename = f'{year}_page_{page}_table_{order}.csv'
-        dirname = os.path.abspath(year)
-        filepath = os.path.join(dirname, filename)
+        csvname = f'{year}_page_{page}_table_{order}.csv'
+        csvpath = os.path.join(dirpath, csvname)
 
-        with open(filepath, mode='w', newline='') as csvf:
+        with open(csvpath, mode='w', newline='') as csvf:
             writer = csv.writer(csvf)
             writer.writerows(adjusted_table)
 
