@@ -61,7 +61,9 @@ def gather_pdf_urls(post_url_list, domain, headers):
     return report_url_list
 
 
-def pdfs_urls_to_csv(filename, urls=START_URLS, base_url=BASE_URL, headers=HEADERS):
+def pdfs_urls_to_csv(
+    filename='odkazy.csv', urls=START_URLS, base_url=BASE_URL, headers=HEADERS
+):
 
     post_urls_list = []
 
@@ -76,5 +78,14 @@ def pdfs_urls_to_csv(filename, urls=START_URLS, base_url=BASE_URL, headers=HEADE
         writer.writerows(pdf_url_list)
 
 
+def get_url_for_year(year: str):
+    with open('odkazy.csv', newline='') as csvf:
+        reader = csv.DictReader(csvf)
+        for row in reader:
+            if row['year'] == year:
+                return row['url']
+    return None
+
+
 if __name__ == '__main__':
-    pdfs_urls_to_csv('odkazy.csv')
+    pdfs_urls_to_csv()

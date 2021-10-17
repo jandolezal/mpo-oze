@@ -1,26 +1,38 @@
 import argparse
+import csv
 
-from links import pdfs_urls_to_csv
+from links import pdfs_urls_to_csv, get_url_for_year
+from parse import parse_pdf
 
 
 def main():
     parser = argparse.ArgumentParser(
-        'mpo', description='get data from reports on renewables from MPO'
+        prog='mpo',
+        description='parse tables in reports on renewables from MPO',
     )
     parser.add_argument(
-        '-u', '--urls', action='store_true', help='scrape pdf urls (default: True)'
+        'subcommand',
+        choices=['links', 'pdf'],
+        help='scrape links to reports or the report pdf itself',
     )
     parser.add_argument(
-        '-o',
-        '--output',
-        default='odkazy.csv',
-        help='set csv filename for report urls (default: odkazy.csv)',
+        '-y',
+        '--year',
+        default='2020',
+        help='select report year of interest (default: 2020)',
     )
 
     args = parser.parse_args()
 
-    if args.urls:
-        pdfs_urls_to_csv(args.output)
+    # Get report urls
+    if args.subcommand == 'links':
+        pdfs_urls_to_csv()
+    # Parse report of interest
+    elif args.subcommand == 'pdf':
+        report_url = get_url_for_year(args.year)
+        parse_pdf(report_url, args.year)
+    else:
+        print('Please use -h flag to see the options.')
 
 
 if __name__ == '__main__':
