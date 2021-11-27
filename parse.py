@@ -24,7 +24,7 @@ def adjust_row(row):
 
 
 def parse_pdf(pdf_url, year):
-    print(f'Starting parsing the report for the year {year}')
+    print(f'Starting parsing the report for the year {year} from {pdf_url}')
     tables = camelot.read_pdf(pdf_url, pages='2-end', suppress_stdout=True)
 
     if not os.path.exists(year):
