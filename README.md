@@ -1,20 +1,32 @@
-# Obnovitelné zdroje v roce ....
+# Renewables in YYYY
 
-Ministerstvo průmyslu a obchodu (MPO) publikuje každoročně statistickou zprávu Obnovitelné zdroje v roce YYYY ve formě pdf souboru.
+The Czech Ministry of Industry and Trade (Ministerstvo průmyslu a obchodu, MPO) each year publishes a statistical report [Renewable Energy Resources in YYYY](https://www.mpo.cz/cz/energetika/statistika/obnovitelne-zdroje-energie/obnovitelne-zdroje-energie-v-roce-2020--263512/) in the form of a PDF file which contains statistics about renewable energy production in the country.
 
-Script scrapuje odkazy na tyto pdf zprávy z [webu MPO](https://www.mpo.cz/cz/energetika/statistika/obnovitelne-zdroje-energie/) a uloží je jako csv.
+This package provides two commands for scraping links to these PDF reports and parsing tables in ther reports (for selected year).
 
-Další script z pdf zprávy naparsuje pomocí [Camelot](https://camelot-py.readthedocs.io/) tabulky s daty, odstraní mezery mezi čísly a uloží tabulky jako csv soubory v adresáři pro příslušný rok. Současně uloží pro každý rok excelový soubor (co tabulka, to list).
+One script scrapes links to these PDF reports from the [website](https://www.mpo.cz/cz/energetika/statistika/obnovitelne-zdroje-energie/) and saves them to CSV.
 
+Another script parses selected pdf report using [Camelot](https://camelot-py.readthedocs.io/):
+* reads data tables,
+* removes spaces between numbers and
+* saves tables as CSV files in the directory for the relevant year. It also saves one Excel file for the year (one worksheet per table).
 
-## Použití
+## Instalation
 
-`python3 -m venv venv`
+```
+python3 -m venv venv
+pip install mpo-oze
+```
 
-`python3 setup.py install`
+## Usage
 
-`mpo -h`
+```
+# Scrape links to csv file
+mpo links
 
+# Parse 2020 report
+mpo pdf --y 2020
+```
 
 ```
 usage: mpo [-h] [-y YEAR] {links,pdf}

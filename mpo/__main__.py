@@ -1,8 +1,8 @@
 import argparse
 import csv
 
-from links import pdfs_urls_to_csv, get_url_for_year
-from parse import parse_pdf
+from mpo import links
+from mpo import pdf
 
 
 def main():
@@ -26,11 +26,11 @@ def main():
 
     # Get report urls
     if args.subcommand == 'links':
-        pdfs_urls_to_csv()
+        links.pdfs_urls_to_csv()
     # Parse report of interest
     elif args.subcommand == 'pdf':
-        report_url = get_url_for_year(args.year)
-        parse_pdf(report_url, args.year)
+        report_url = links.get_url_for_year(args.year)
+        pdf.parse_pdf(report_url, args.year)
     else:
         print('Please use -h flag to see the options.')
 
