@@ -9,23 +9,26 @@ Další script z pdf zprávy naparsuje pomocí [Camelot](https://camelot-py.read
 
 ## Použití
 
-`python3 -m venv venv`
+```bash
+python3 -m venv venv
 
-`python3 setup.py install`
+pip install mpo-oze
 
-`mpo -h`
-
+mpo -h
+```
 
 ```
-usage: mpo [-h] [-y YEAR] {links,pdf}
+usage: mpo [-h] [-y YEAR] [-p PAGES] {links,pdf,show}
 
-parse tables in reports on renewables from MPO
+parse czech renewable energy pdf reports
 
 positional arguments:
-  {links,pdf}           scrape links to reports or the report pdf itself
+  {links,pdf,show}      scrape links to reports, parse report or show report
+                        in a browser
 
 optional arguments:
   -h, --help            show this help message and exit
   -y YEAR, --year YEAR  select report year of interest (default: 2020)
-
+  -p PAGES, --pages PAGES
+                        select pages, e.g. 1,3-5,7-end (default: 2-end)
 ```
