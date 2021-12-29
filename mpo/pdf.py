@@ -24,7 +24,7 @@ def adjust_row(row):
 
 
 def parse_pdf(pdf_url, year, pages='2-end'):
-    print(f'Starting parsing the report for the year {year} from {pdf_url}')
+    print(f'Starting parsing the report for the year {year} from\n{pdf_url}')
     tables = camelot.read_pdf(pdf_url, pages=pages, suppress_stdout=True)
 
     if not os.path.exists(year):
@@ -64,7 +64,7 @@ def parse_pdf(pdf_url, year, pages='2-end'):
 
 
 def main():
-    with open('odkazy.csv', newline='') as csvf:
+    with open('links.csv', newline='') as csvf:
         reader = csv.DictReader(csvf)
 
         for row in reader:

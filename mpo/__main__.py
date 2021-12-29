@@ -1,5 +1,6 @@
 import argparse
 import csv
+import pathlib
 
 from mpo import links, pdf, show
 
@@ -29,9 +30,11 @@ def main():
     args = parser.parse_args()
 
     # Get report urls
-    if args.subcommand == 'links':
+    if not pathlib.Path('links.csv').exists():
         links.pdfs_urls_to_csv()
     # Open report in a browser
+    if args.subcommand == 'links':
+        pass
     elif args.subcommand == 'show':
         report_url = links.get_url_for_year(args.year)
         show.open_report_page(report_url)
